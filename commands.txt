@@ -6,3 +6,5 @@ from gemMarketData.models import *
 
 
 python manage.py makemigrations --empty gemMarketData -n addInstrumentTypes
+
+
