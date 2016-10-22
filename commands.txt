@@ -1,9 +1,9 @@
 python manage.py runserver 0.0.0.0:8000
 
 python manage.py shell
-from gemMarketData.models import *
+from gemDatabase.models import *
 
-
+source gemenv/bin/activate
 
 python manage.py makemigrations --empty gemMarketData -n addInstrumentTypes
 
