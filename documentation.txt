@@ -14,3 +14,6 @@ Use shell_plus to load models when opening shell:
 
 https://github.com/django-extensions/django-extensions
 pip install django-extensions
+
+
+Standalone scripts : https://docs.djangoproject.com/en/1.10/howto/custom-management-commands/
