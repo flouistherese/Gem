@@ -59,6 +59,15 @@ class SettlementType(models.Model):
   class Meta:
         db_table="settlement_types"
 
+class Month(models.Model):
+  code = models.CharField(max_length=20, blank = False, null = False)
+  description = models.CharField(max_length=200, blank = False, null = False)
+  month_code = models.CharField(max_length=200, blank = False, null = False)
+  __metaclass__ = ModelMeta
+
+  class Meta:
+        db_table="months"
+
 class CurrencyPair(models.Model):
   code = models.CharField(max_length=20, blank = False, null = False)
   description = models.CharField(max_length=200, blank = False, null = False)
@@ -96,8 +105,43 @@ class Future(models.Model):
   class Meta:
         db_table="futures"
 
-class MarketDataPoint(models.Model):
+class FutureContract(models.Model):
   instrument = models.ForeignKey(Instrument, blank = False, null = False)
+  future = models.ForeignKey(Future, blank = False, null = True)
+  first_trade_date = models.DateField(blank = False, null = False)
+  last_trade_date = models.DateField(blank = False, null = False)
+  month = models.ForeignKey(Month, blank = False, null = True)
+  year = models.IntegerField(blank = False, null = False)
+  __metaclass__ = ModelMeta
+
+  class Meta:
+        db_table="future_contracts"
+
+class Stock(models.Model):
+  code = models.CharField(max_length=20, blank = False, null = False)
+  description = models.CharField(max_length=200, blank = False, null = False)
+  bloomberg_code = models.CharField(max_length=20, blank = False, null = False)
+  company = models.CharField(max_length=200, blank = False, null = False)
+  currency = models.ForeignKey(Currency, blank = False, null = False)
+  instrument = models.ForeignKey(Instrument, blank = False, null = False)
+  __metaclass__ = ModelMeta
+
+  class Meta:
+        db_table="stocks"
+
+class InstrumentFamily(models.Model):
+  code = models.CharField(max_length=20, blank = False, null = False)
+  description = models.CharField(max_length=200, blank = False, null = False)
+  future = models.ForeignKey(Future, blank = False, null = True)
+  stock = models.ForeignKey(Stock, blank = False, null = True)
+  __metaclass__ = ModelMeta
+
+  class Meta:
+        db_table="instrument_families"
+
+class MarketDataPoint(models.Model):
+  instrument = models.ForeignKey(Instrument, blank = False, null = True)
+  date = models.DateField(blank = False, null = False)
   data_point_source = models.ForeignKey(DataPointSource, blank = False, null = False)
   data_point_type = models.ForeignKey(DataPointType, blank = False, null = False)
   value = models.DecimalField(max_digits=30, decimal_places=10, blank = False, null = False)
