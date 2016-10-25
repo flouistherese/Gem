@@ -17,3 +17,61 @@ pip install django-extensions
 
 
 Standalone scripts : https://docs.djangoproject.com/en/1.10/howto/custom-management-commands/
+
+
+SQLAlchemy:
+http://rodic.fr/blog/sqlalchemy-django/
+
+Install git:
+sudo apt install git
+
+Install vim:
+sudo apt install vim
+
+Install Django:
+sudo apt-get update
+sudo apt-get install python-django
+
+Install pip:
+sudo apt-get install python-pip
+
+Install virtualenv:
+sudo pip install virtualenv
+
+Install Sublime Text:
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get install sublime-text-installer
+
+Install PostgreSQL:
+sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
+sudo su - postgres
+psql
+CREATE DATABASE gem;
+CREATE USER gemcorp WITH PASSWORD 'azerty';
+ALTER ROLE gemcorp SET client_encoding TO 'utf8';
+ALTER ROLE gemcorp SET default_transaction_isolation TO 'read committed';
+ALTER ROLE gemcorp SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE gem TO gemcorp;
+\q
+exit
+
+Install pgAdmin3 and import database:
+From Software Manager
+Name: gem
+Host: localhost 
+username: gemcorp
+password: azerty
+
+Click on databases/gem
+
+In top top bar, Plugins/PSQL Console
+Type: \i /home/florian/Dropbox/database.sql
+
+
+Run django app:
+cd to Gem project
+source gemenv/bin/activate
+cd gemSystematic
+python manage.py makemigrations gemDatabase
+python manage.py migrate

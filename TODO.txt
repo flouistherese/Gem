@@ -1,0 +1,2 @@
+- DONE Import market data since latest day
+- Market data checks

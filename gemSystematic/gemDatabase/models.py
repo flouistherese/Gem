@@ -139,7 +139,7 @@ class InstrumentFamily(models.Model):
   class Meta:
         db_table="instrument_families"
 
-class MarketDataPoint(models.Model):
+class DataPoint(models.Model):
   instrument = models.ForeignKey(Instrument, blank = False, null = True)
   date = models.DateField(blank = False, null = False)
   data_point_source = models.ForeignKey(DataPointSource, blank = False, null = False)
@@ -148,4 +148,4 @@ class MarketDataPoint(models.Model):
   __metaclass__ = ModelMeta
 
   class Meta:
-        db_table="market_data_points"
+        db_table="data_points"

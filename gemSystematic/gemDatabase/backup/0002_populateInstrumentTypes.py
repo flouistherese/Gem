@@ -8,10 +8,10 @@ from gemDatabase.models import *
 def populate_instrument_type(apps, schema_editor):
     # We can't import the Person model directly as it may be a newer
     # version than this migration expects. We use the historical version.
-    InstrumentType(code = "FUTURE", label="Future", description = "Future").save()
-    InstrumentType(code = "FX_FORWARD", label="FX Forward", description = "FX Forward").save()
-    InstrumentType(code = "ETF", label="ETF", description = "Exchange Traded Fund").save()
-    InstrumentType(code = "STOCK", label="Stock", description = "Stock").save()
+    InstrumentType(code = "FUTURE", description = "Future").save()
+    InstrumentType(code = "FX_FORWARD", description = "FX Forward").save()
+    InstrumentType(code = "ETF", description = "Exchange Traded Fund").save()
+    InstrumentType(code = "STOCK", description = "Stock").save()
 
 
 class Migration(migrations.Migration):

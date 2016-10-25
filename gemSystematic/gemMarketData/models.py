@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from gemDatabase.models import Currency, InstrumentType, Exchange, Instrument, MarketDataPoint
+from gemDatabase.models import Currency, InstrumentType, Exchange, Instrument, DataPoint
 import pandas as pd
 from django_pandas.io import read_frame
 
@@ -21,9 +21,7 @@ class MarketEnvironment:
 		market_env.instrument_types = read_frame(InstrumentType.objects.all()).drop('id', 1)
 		market_env.exchanges = read_frame(Exchange.objects.all()).drop('id', 1)
 		market_env.instruments = read_frame(Instrument.objects.all()).drop('id', 1)
-		market_env.stock_prices = pd.DataFrame(list(MarketDataPoint.objects.filter(data_point_type__code = 'CLOSE').values('date', 'value','instrument__code')))
-		
-		data_points = read_frame(MarketDataPoint.objects.all()).drop('id', 1)
+		market_env.stock_prices = pd.DataFrame(list(DataPoint.objects.filter(data_point_type__code = 'CLOSE').values('date', 'value','instrument__code')))
 		return market_env
 
 
