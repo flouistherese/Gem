@@ -110,6 +110,7 @@ class FutureContract(models.Model):
   future = models.ForeignKey(Future, blank = False, null = True)
   first_trade_date = models.DateField(blank = False, null = False)
   last_trade_date = models.DateField(blank = False, null = False)
+  first_notice_date = models.DateField(blank = False, null = False)
   month = models.ForeignKey(Month, blank = False, null = True)
   year = models.IntegerField(blank = False, null = False)
   __metaclass__ = ModelMeta
@@ -144,8 +145,32 @@ class DataPoint(models.Model):
   date = models.DateField(blank = False, null = False)
   data_point_source = models.ForeignKey(DataPointSource, blank = False, null = False)
   data_point_type = models.ForeignKey(DataPointType, blank = False, null = False)
-  value = models.DecimalField(max_digits=30, decimal_places=10, blank = False, null = False)
+  value = models.DecimalField(max_digits=30, decimal_places=10, blank = False, null = True)
   __metaclass__ = ModelMeta
 
   class Meta:
         db_table="data_points"
+
+class ReportType(models.Model):
+  code = models.CharField(max_length=20, blank = False, null = False)
+  description = models.CharField(max_length=200, blank = False, null = False)
+  __metaclass__ = ModelMeta
+
+  class Meta:
+        db_table="report_types"
+
+class Report(models.Model):
+  report_date = models.DateField(blank = False, null = False)
+  report_type = models.ForeignKey(ReportType, blank = False, null = False)
+
+  class Meta:
+        db_table="reports"   
+
+
+class ReportItem(models.Model):
+  data_point = models.ForeignKey(DataPoint, blank = False, null = False)
+  report = models.ForeignKey(Report, blank = False, null = False)
+  ignored = models.BooleanField(default = False)
+  z_score = models.DecimalField(max_digits=8, decimal_places=4, blank = False, null = True)
+  class Meta:
+        db_table="report_items"   
