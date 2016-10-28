@@ -1,11 +1,6 @@
-from __future__ import unicode_literals
-
-from django.db import models
 from gemDatabase.models import Currency, InstrumentType, Exchange, Instrument, DataPoint
 import pandas as pd
 from django_pandas.io import read_frame
-
-# Create your models here.
 
 class MarketEnvironment:
 	currencies = pd.DataFrame()
@@ -23,5 +18,3 @@ class MarketEnvironment:
 		market_env.instruments = read_frame(Instrument.objects.all()).drop('id', 1)
 		market_env.stock_prices = pd.DataFrame(list(DataPoint.objects.filter(data_point_type__code = 'CLOSE').values('date', 'value','instrument__code')))
 		return market_env
-
-

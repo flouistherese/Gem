@@ -4,23 +4,14 @@ from sqlalchemy import create_engine
 from datetime import timedelta
 import quandl
 import pandas as pd
-import pdb
 
-class Command(BaseCommand):
-	help = 'Erases stored data points, then downloads and stores a fresh set'
 
-	def add_arguments(self, parser):
-		parser.add_argument(
-			'--drop_tables',
-			action='store_true',
-			dest='drop_tables',
-			default=False,
-			help='Erase data points table before downloading data',
-		)
+class MarketDataImport:
 
-	def handle(self, *args, **options):
+	@staticmethod
+	def run_backfill(drop_tables = False):
 		engine = create_engine('postgresql://gemcorp:azerty@localhost:5432/gem')
-		if options['drop_tables']:
+		if drop_tables:
 			print "Erasing data in DataPoint table"
 			DataPoint.objects.all().delete()
 
@@ -45,7 +36,7 @@ class Command(BaseCommand):
 				response.to_sql('data_points',engine, if_exists='append', index = False)
 				print "Inserted ",len(response.index)," points for ",st.bloomberg_code
 
-		prin "Downloading and inserting futures data"
+		print "Downloading and inserting futures data"
 		#Futures
 		futures_contracts_instruments = list(Instrument.objects.filter(instrument_type_id = InstrumentType["FUTURE"].id))
 		for fu in futures_contracts_instruments:

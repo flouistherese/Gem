@@ -160,7 +160,7 @@ class ReportType(models.Model):
         db_table="report_types"
 
 class Report(models.Model):
-  report_date = models.DateField(blank = False, null = False)
+  report_date = models.DateTimeField(auto_now=True, blank = False, null = False)
   report_type = models.ForeignKey(ReportType, blank = False, null = False)
 
   class Meta:
