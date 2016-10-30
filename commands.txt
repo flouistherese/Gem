@@ -13,3 +13,4 @@ sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython
 
 pip install django-pandas
 
+python manage.py shell_plus --ipython

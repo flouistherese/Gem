@@ -1,2 +1,3 @@
 - DONE Import market data since latest day
 - Market data checks
+- Import continuous contract from quandl

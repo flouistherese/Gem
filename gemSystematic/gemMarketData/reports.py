@@ -16,3 +16,11 @@ class ReportZeroValue:
 		zero_value_points['report_id'] = rep.id
 		zero_value_points['ignored'] = False
 		zero_value_points.to_sql('report_items',engine, if_exists='append', index = False)
+
+class ReportMissingData:
+
+	@staticmethod
+	def run():
+		engine = create_engine('postgresql://gemcorp:azerty@localhost:5432/gem')
+		rep = Report(report_type = ReportType["MISSING_DATA"])
+		rep.save()

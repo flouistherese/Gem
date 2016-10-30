@@ -113,6 +113,7 @@ class FutureContract(models.Model):
   first_notice_date = models.DateField(blank = False, null = False)
   month = models.ForeignKey(Month, blank = False, null = True)
   year = models.IntegerField(blank = False, null = False)
+  bloomberg_code = models.CharField(max_length=20, blank = False, null = False)
   __metaclass__ = ModelMeta
 
   class Meta:
@@ -164,7 +165,7 @@ class Report(models.Model):
   report_type = models.ForeignKey(ReportType, blank = False, null = False)
 
   class Meta:
-        db_table="reports"   
+        db_table="reports"
 
 
 class ReportItem(models.Model):
@@ -173,4 +174,14 @@ class ReportItem(models.Model):
   ignored = models.BooleanField(default = False)
   z_score = models.DecimalField(max_digits=8, decimal_places=4, blank = False, null = True)
   class Meta:
-        db_table="report_items"   
+        db_table="report_items"
+
+class DataFeed(models.Model):
+  code = models.CharField(max_length=20, blank = False, null = False)
+  description = models.CharField(max_length=200, blank = False, null = False)
+  future = models.ForeignKey(Future, blank = False, null = False)
+  instrument = models.ForeignKey(Instrument, blank = False, null = False)
+  bloomberg_code = models.CharField(max_length=20, blank = False, null = False)
+  __metaclass__ = ModelMeta
+  class Meta:
+        db_table="data_feeds"
