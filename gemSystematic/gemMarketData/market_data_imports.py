@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from gemDatabase.models import *
 from gemMarketData.market_data_helpers import *
+from gemMarketData.market_data_interfaces import *
 from sqlalchemy import create_engine
 from datetime import timedelta
 import quandl
@@ -44,65 +45,39 @@ class MarketDataImport:
 			response.to_sql('data_points', sql_alchemy_engine, if_exists='append', index = False)
 			print "Inserted ",len(response.index)," points for ",product.bloomberg_code
 
+
 	@staticmethod
-	def backfill_stock_data(sql_alchemy_engine, data_point_types = get_data_point_types()):
-		print "Downloading and inserting stock data"
-		columns = ['Open', 'Low', 'High', 'Close', 'Volume']
-		stocks = list(Stock.objects.all())
-		for st in stocks:
-			existing_data_points = DataPoint.objects.filter(instrument_id = st.instrument.id)
+	def backfill_data(products, columns, sql_alchemy_engine, data_point_types = get_data_point_types(), market_data_interface = QuandlInterface()):
+		for p in products:
+			existing_data_points = DataPoint.objects.filter(instrument_id = p.instrument.id)
 			latest_date = None
 			if existing_data_points:
-				latest_date = DataPoint.objects.filter(instrument_id = st.instrument.id).latest('date').date
+				latest_date = DataPoint.objects.filter(instrument_id = p.instrument.id).latest('date').date
 				latest_date = str(latest_date + timedelta(days = 1))
-			response = quandl.get(st.bloomberg_code, start_date = latest_date)[columns]
-			MarketDataImport.store_market_data(st, response, columns, data_point_types, sql_alchemy_engine)
-
-	@staticmethod
-	def backfill_future_contract_data(sql_alchemy_engine, data_point_types = get_data_point_types()):
-		print "Downloading and inserting futures data"
-		columns = ['Open', 'Low', 'High', 'Last', 'Volume', 'Open Interest']
-		futures_contracts = list(FutureContract.objects.all())
-		for fu in futures_contracts:
-			existing_data_points = DataPoint.objects.filter(instrument_id = fu.instrument.id)
-			latest_date = None
-			if existing_data_points:
-				latest_date = DataPoint.objects.filter(instrument_id = fu.instrument.id).latest('date').date
-				latest_date = str(latest_date + timedelta(days = 1))
-			contract = FutureContract.objects.filter(instrument_id = fu.instrument.id).first()
-			response = quandl.get(fu.bloomberg_code, start_date = latest_date)[columns]
-			response.rename(columns={'Last':'Close'}, inplace=True)
-			MarketDataImport.store_market_data(fu, response, ['Open', 'Low', 'High', 'Close', 'Volume', 'Open Interest'], data_point_types, sql_alchemy_engine)
-
-	@staticmethod
-	def backfill_feed_data(sql_alchemy_engine, data_point_types = get_data_point_types()):
-		print "Downloading and inserting data feed data"
-		columns = ['Close']
-		data_feeds = list(DataFeed.objects.all())
-		for df in data_feeds:
-			existing_data_points = DataPoint.objects.filter(instrument_id = df.instrument.id)
-			latest_date = None
-			if existing_data_points:
-				latest_date = DataPoint.objects.filter(instrument_id = df.instrument.id).latest('date').date
-				latest_date = str(latest_date + timedelta(days = 1))
-			response = quandl.get(df.bloomberg_code, start_date = latest_date)[['Last']]
-			response.rename(columns={'Last':'Close'}, inplace=True)
-			MarketDataImport.store_market_data(df, response, columns, data_point_types, sql_alchemy_engine)
+			response = market_data_interface.get_historical_data(p.bloomberg_code, columns, latest_date)
+			MarketDataImport.store_market_data(p, response, columns, data_point_types, sql_alchemy_engine)
 
 
 	@staticmethod
-	def run_backfill(drop_tables = False):
+	def run_backfill(drop_tables = False, market_data_interface = QuandlInterface()):
 		engine = create_engine('postgresql://gemcorp:azerty@localhost:5432/gem')
 		data_point_types = get_data_point_types()
 		if drop_tables:
 			print "Erasing data in DataPoint table"
 			DataPoint.objects.all().delete()
 
-		MarketDataImport.backfill_stock_data(engine, data_point_types)
+		stock_columns = ['Open', 'Low', 'High', 'Close', 'Volume']
+		future_contracts_columns = ['Open', 'Low', 'High', 'Close', 'Volume', 'Open Interest']
+		data_feed_columns = ['Close']
+		currency_pair_columns = ['Close']
 
-		MarketDataImport.backfill_future_contract_data(engine, data_point_types)
+		MarketDataImport.backfill_data(list(Stock.objects.all()), stock_columns, engine, data_point_types, market_data_interface)
+
+		MarketDataImport.backfill_data(list(FutureContract.objects.all()), future_contracts_columns,  engine, data_point_types, market_data_interface)
 		
-		MarketDataImport.backfill_feed_data(engine, data_point_types)
+		MarketDataImport.backfill_data(list(DataFeed.objects.all()), data_feed_columns, engine, data_point_types, market_data_interface)
+
+		MarketDataImport.backfill_data(list(CurrencyPair.objects.all()), currency_pair_columns, engine, data_point_types, market_data_interface)
 
 		
 
