@@ -1,3 +1,6 @@
 - DONE Import market data since latest day
 - Market data checks
 - Import continuous contract from quandl
+- Define generic futures months
+- Write next() function for future contracts
+- Write populate_new_contracts for Future

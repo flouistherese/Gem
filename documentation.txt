@@ -20,7 +20,7 @@ Standalone commands : https://docs.djangoproject.com/en/1.10/howto/custom-manage
 
 Standalone scrips:http://stackoverflow.com/questions/32085888/where-to-place-external-python-scripts-in-a-django-project
 
-
+Split models into files: https://code.djangoproject.com/wiki/CookBookSplitModelsToFiles
 
 SQLAlchemy:
 http://rodic.fr/blog/sqlalchemy-django/

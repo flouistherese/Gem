@@ -4,7 +4,6 @@ from gemMarketData.market_data_helpers import *
 from gemMarketData.market_data_interfaces import *
 from sqlalchemy import create_engine
 from datetime import timedelta
-import quandl
 import pandas as pd
 
 
