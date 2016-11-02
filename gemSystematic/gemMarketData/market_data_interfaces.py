@@ -16,3 +16,8 @@ class QuandlInterface:
 			response.rename(columns={'Value':'Close'}, inplace=True)
 
 		return response[fields]
+
+	def retrieve_contract_information(self, contract):
+		#TODO
+		#Should raise when no information is found
+		raise 'Function retrieve_contract_information() is not implemented yet for Quandl interface'

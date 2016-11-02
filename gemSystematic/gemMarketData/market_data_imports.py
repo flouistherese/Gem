@@ -20,15 +20,7 @@ class MarketDataImport:
 		futures_contracts = pd.DataFrame(list(FutureContract.objects.values('first_trade_date', 'last_trade_date', 'first_notice_date', 'month__month_code', 'year', 'future__bloomberg_code', 'instrument__code')))
 
 		for fu in futures:
-			available_contracts = get_futures_contracts_trading(fu.bloomberg_code)
-			comparison = pd.merge(futures_contracts,available_contracts, how='outer', indicator=True)
-			missing_contracts = comparison.copy()
-			missing_contracts = missing_contracts.loc[missing_contracts['_merge'] != 'both'].drop('_merge', 1)
-			if not missing_contracts.empty:
-				missing_contracts.rename(columns={'future__bloomberg_code':'future_id', 'month__month_code':'month_id'}, inplace=True)
-				missing_contracts['future_id'] = map(lambda x: Future[x].id, missing_contracts['future_id'])
-				missing_contracts['month_id'] = map(lambda x: Month.objects.get(month_code = x).id, missing_contracts['month_id'])
-				#TODO: Create instruments before creating FutureContracts
+			fu.populate_new_contracts()
 
 
 	@staticmethod

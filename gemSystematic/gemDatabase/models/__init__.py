@@ -13,8 +13,9 @@ from report_type import ReportType
 from report import Report
 from report_item import ReportItem
 from stock import Stock
-
+from future_month import FutureMonth
 from future_contract import FutureContract
 from future import Future
 from data_point import DataPoint
 from data_feed import DataFeed
+
