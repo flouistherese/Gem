@@ -24,3 +24,15 @@ class ReportMissingData:
 		engine = create_engine('postgresql://gemcorp:azerty@localhost:5432/gem')
 		rep = Report(report_type = ReportType["MISSING_DATA"])
 		rep.save()
+		#TODO: Write missing data report
+
+
+class ReportLargeMovement:
+
+	@staticmethod
+	def run():
+		engine = create_engine('postgresql://gemcorp:azerty@localhost:5432/gem')
+		rep = Report(report_type = ReportType["LARGE_PRICE_MOVE"])
+		rep.save()
+		#TODO: Write large price move report
+

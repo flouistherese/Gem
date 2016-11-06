@@ -25,7 +25,7 @@ class Future(models.Model):
     count = 0
     contracts = FutureContract.objects.filter(future_id = self.id)
 
-    if len(contracts) != 0
+    if(len(contracts) != 0):
       new_contract = contracts.latest('last_trade_date')
       while True:
         try:
@@ -40,6 +40,7 @@ class Future(models.Model):
           break
     else:
       #TODO: Import all contracts from future
+      print "Cant import new contracts: no contract exists for future " + self.code
     print "Imported " + str(count) + " contracts for future " + self.code
 
 

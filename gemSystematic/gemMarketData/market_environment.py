@@ -15,6 +15,7 @@ class MarketEnvironment:
 	future_contracts = pd.DataFrame()
 	stock_data = pd.DataFrame()
 	feed_data = pd.DataFrame()
+	fx_spot = pd.DataFrame()
 
 	@staticmethod
 	def export(directory = default_dated_directory()):
@@ -42,6 +43,9 @@ class MarketEnvironment:
 
 		market_env.feed_data = pd.DataFrame(list(DataPoint.objects.filter(data_point_type__code = 'CLOSE', instrument__instrument_type__code = 'DATA_FEED').values('date', 'value','instrument__code')))
 		market_env.feed_data.rename(columns={'instrument__code':'feed'}, inplace=True)
+
+		market_env.fx_spot = pd.DataFrame(list(DataPoint.objects.filter(data_point_type__code = 'CLOSE', instrument__instrument_type__code = 'FX_SPOT').values('date', 'value','instrument__code')))
+		market_env.fx_spot.rename(columns={'instrument__code':'instrument'}, inplace=True)
 
 		if not os.path.exists(directory):
 			os.makedirs(directory)
