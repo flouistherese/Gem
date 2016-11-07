@@ -2,8 +2,11 @@ from gemDatabase.models import *
 from gemMarketData.market_data_helpers import *
 import pandas as pd
 import cPickle as pickle
+import os.path
+from gemUtils.utils import default_dated_directory
+from gemTradingData.trading_environment import TradingEnvironment
 
-class TradingEnvironment:
+class TradingEnvironmentExport:
 	strategies = pd.DataFrame()
 	trading_models = pd.DataFrame()
 	model_feeds = pd.DataFrame()
@@ -29,15 +32,3 @@ class TradingEnvironment:
 			pickle.dump(trading_env, pickle_file, pickle.HIGHEST_PROTOCOL)
 
 		return trading_env
-
-
-	@staticmethod
-	def load(date_directory = date.today(), file_path = None):
-		if file_path is None:
-			file_path = os.path.join(default_dated_directory(date_directory), 'trading_environment')
-
-		if not os.path.exists(file_path):
-			raise Exception('No trading environment was found for ' + date_directory)
-
-		with open(file_path, 'rb') as f:
-			return pickle.load(f)
