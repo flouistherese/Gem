@@ -18,7 +18,7 @@ class TradingEnvironmentExport:
 		trading_env.strategies = pd.DataFrame(list(Strategy.objects.values('code', 'description', 'strategy_type__code')))
 		trading_env.strategies.rename(columns={'strategy_type__code':'strategy_type'}, inplace=True)
 
-		trading_env.trading_models = pd.DataFrame(list(TradingModel.objects.values('code', 'description', 'strategy__code')))
+		trading_env.trading_models = pd.DataFrame(list(TradingModel.objects.values('code', 'description', 'strategy__code', 'enabled')))
 		trading_env.trading_models.rename(columns={'strategy__code':'strategy'}, inplace=True)
 
 		trading_env.model_feeds = pd.DataFrame(list(TradingModelFeed.objects.values('trading_model__code', 'data_feed__code')))
