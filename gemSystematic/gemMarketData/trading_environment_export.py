@@ -7,9 +7,6 @@ from gemUtils.utils import default_dated_directory
 from gemTradingData.trading_environment import TradingEnvironment
 
 class TradingEnvironmentExport:
-	strategies = pd.DataFrame()
-	trading_models = pd.DataFrame()
-	model_feeds = pd.DataFrame()
 	
 	@staticmethod
 	def export(directory = default_dated_directory()):
@@ -23,6 +20,21 @@ class TradingEnvironmentExport:
 
 		trading_env.model_feeds = pd.DataFrame(list(TradingModelFeed.objects.values('trading_model__code', 'data_feed__code')))
 		trading_env.model_feeds.rename(columns={'trading_model__code':'trading_model', 'data_feed__code':'feed'}, inplace=True)
+
+		trading_env.target_instruments = pd.DataFrame(list(TargetInstrument.objects.values('trading_model__code', 'instrument__code')))
+		trading_env.model_feeds.rename(columns={'trading_model__code':'trading_model', 'instrument__code':'instrument'}, inplace=True)
+
+		trading_env.accounts = pd.DataFrame(list(Account.objects.values('code', 'account_group__code', 'account_capital', 'volatility_target')))
+		trading_env.accounts.rename(columns={'account_group__code':'account_group'}, inplace=True)
+
+		trading_env.model_limits = pd.DataFrame(list(ModelLimit.objects.values('trading_model__code', 'account__code', 'limit_type__code', 'value')))
+		trading_env.model_limits.rename(columns={'trading_model__code':'trading_model', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
+
+		trading_env.asset_limits = pd.DataFrame(list(AssetLimit.objects.values('instrument_family__code', 'account__code', 'limit_type__code', 'value')))
+		trading_env.asset_limits.rename(columns={'instrument_family__code':'instrument_family', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
+
+		trading_env.sector_limits = pd.DataFrame(list(SectorLimit.objects.values('sector__code', 'account__code', 'limit_type__code', 'value')))
+		trading_env.sector_limits.rename(columns={'sector__code':'sector', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
 
 
 		if not os.path.exists(directory):

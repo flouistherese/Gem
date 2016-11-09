@@ -1,6 +1,8 @@
 from meta_class import ModelMeta
 from exchange import Exchange
+from limit_type import LimitType
 from currency import Currency
+from sector import Sector
 from month import Month
 from account_group import AccountGroup
 from account import Account
@@ -23,6 +25,10 @@ from data_feed import DataFeed
 from strategy_type import StrategyType
 from strategy import Strategy
 from trading_model import TradingModel
+from target_instrument import TargetInstrument
 from trading_model_feed import TradingModelFeed
+from model_limit import ModelLimit
+from asset_limit import AssetLimit
+from sector_limit import SectorLimit
 
 
