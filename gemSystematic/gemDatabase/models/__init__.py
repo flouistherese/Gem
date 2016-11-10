@@ -27,8 +27,19 @@ from strategy import Strategy
 from trading_model import TradingModel
 from target_instrument import TargetInstrument
 from trading_model_feed import TradingModelFeed
+
+#Limits
 from model_limit import ModelLimit
 from asset_limit import AssetLimit
 from sector_limit import SectorLimit
+
+#Portfolio Tree
+from portfolio_gearing import PortfolioGearing
+from strategy_type_gearing import StrategyTypeGearing
+from strategy_gearing import StrategyGearing
+from strategy_type_weight import StrategyTypeWeight
+from strategy_weight import StrategyWeight
+from trading_model_weight import TradingModelWeight
+
 
 

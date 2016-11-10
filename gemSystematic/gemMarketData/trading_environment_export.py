@@ -12,11 +12,16 @@ class TradingEnvironmentExport:
 	def export(directory = default_dated_directory()):
 		trading_env = TradingEnvironment()
 
+		#Accounts
+		trading_env.accounts = pd.DataFrame(list(Account.objects.values('code', 'account_group__code', 'account_capital', 'volatility_target')))
+		trading_env.accounts.rename(columns={'code':'account','account_group__code':'account_group'}, inplace=True)
+
+		#Models
 		trading_env.strategies = pd.DataFrame(list(Strategy.objects.values('code', 'description', 'strategy_type__code')))
-		trading_env.strategies.rename(columns={'strategy_type__code':'strategy_type'}, inplace=True)
+		trading_env.strategies.rename(columns={'code':'strategy','strategy_type__code':'strategy_type'}, inplace=True)
 
 		trading_env.trading_models = pd.DataFrame(list(TradingModel.objects.values('code', 'description', 'strategy__code', 'enabled')))
-		trading_env.trading_models.rename(columns={'strategy__code':'strategy'}, inplace=True)
+		trading_env.trading_models.rename(columns={'code':'trading_model','strategy__code':'strategy'}, inplace=True)
 
 		trading_env.model_feeds = pd.DataFrame(list(TradingModelFeed.objects.values('trading_model__code', 'data_feed__code')))
 		trading_env.model_feeds.rename(columns={'trading_model__code':'trading_model', 'data_feed__code':'feed'}, inplace=True)
@@ -24,9 +29,7 @@ class TradingEnvironmentExport:
 		trading_env.target_instruments = pd.DataFrame(list(TargetInstrument.objects.values('trading_model__code', 'instrument__code')))
 		trading_env.model_feeds.rename(columns={'trading_model__code':'trading_model', 'instrument__code':'instrument'}, inplace=True)
 
-		trading_env.accounts = pd.DataFrame(list(Account.objects.values('code', 'account_group__code', 'account_capital', 'volatility_target')))
-		trading_env.accounts.rename(columns={'account_group__code':'account_group'}, inplace=True)
-
+		#Limits
 		trading_env.model_limits = pd.DataFrame(list(ModelLimit.objects.values('trading_model__code', 'account__code', 'limit_type__code', 'value')))
 		trading_env.model_limits.rename(columns={'trading_model__code':'trading_model', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
 
@@ -36,6 +39,28 @@ class TradingEnvironmentExport:
 		trading_env.sector_limits = pd.DataFrame(list(SectorLimit.objects.values('sector__code', 'account__code', 'limit_type__code', 'value')))
 		trading_env.sector_limits.rename(columns={'sector__code':'sector', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
 
+		#Portfolio Tree
+		trading_env.portfolio_gearings = pd.DataFrame(list(PortfolioGearing.objects.values('account_group__code', 'value')))
+		trading_env.portfolio_gearings.rename(columns={'account_group__code':'account_group','value':'portfolio_gearing'}, inplace=True)
+
+		trading_env.strategy_types_gearings = pd.DataFrame(list(StrategyTypeGearing.objects.values('account_group__code', 'strategy_type__code', 'value')))
+		trading_env.strategy_types_gearings.rename(columns={'account_group__code':'account_group', 'strategy_type__code':'strategy_type','value':'strategy_types_gearing'}, inplace=True)
+
+		trading_env.strategy_gearings = pd.DataFrame(list(StrategyGearing.objects.values('account_group__code', 'strategy__code', 'value')))
+		trading_env.strategy_gearings.rename(columns={'account_group__code':'account_group', 'strategy__code':'strategy','value':'strategy_gearing'}, inplace=True)
+		trading_env.strategy_gearings = trading_env.strategy_gearings.merge(trading_env.strategies[['strategy','strategy_type']])
+
+
+		trading_env.strategy_types_weights = pd.DataFrame(list(StrategyTypeWeight.objects.values('account_group__code', 'strategy_type__code', 'value')))
+		trading_env.strategy_types_weights.rename(columns={'account_group__code':'account_group', 'strategy_type__code':'strategy_type','value':'strategy_types_weight'}, inplace=True)
+
+		trading_env.strategy_weights = pd.DataFrame(list(StrategyWeight.objects.values('account_group__code', 'strategy__code', 'value')))
+		trading_env.strategy_weights.rename(columns={'account_group__code':'account_group', 'strategy__code':'strategy','value':'strategy_weight'}, inplace=True)
+		trading_env.strategy_weights = trading_env.strategy_weights.merge(trading_env.strategies[['strategy','strategy_type']])
+
+		trading_env.model_weights = pd.DataFrame(list(TradingModelWeight.objects.values('account_group__code', 'trading_model__code', 'value')))
+		trading_env.model_weights.rename(columns={'account_group__code':'account_group', 'trading_model__code':'trading_model','value':'model_weight'}, inplace=True)
+		trading_env.model_weights = trading_env.model_weights.merge(trading_env.trading_models[['strategy','trading_model']])
 
 		if not os.path.exists(directory):
 			os.makedirs(directory)
