@@ -3,6 +3,7 @@ from gemMarketData.market_data_helpers import *
 import pandas as pd
 import cPickle as pickle
 import os.path
+from decimal import *
 from gemUtils.utils import default_dated_directory
 from gemTradingData.trading_environment import TradingEnvironment
 
@@ -15,6 +16,7 @@ class TradingEnvironmentExport:
 		#Accounts
 		trading_env.accounts = pd.DataFrame(list(Account.objects.values('code', 'account_group__code', 'account_capital', 'volatility_target')))
 		trading_env.accounts.rename(columns={'code':'account','account_group__code':'account_group'}, inplace=True)
+		trading_env.accounts['scaling'] = (trading_env.accounts['account_capital'].astype('float64') / 100E6) * (trading_env.accounts['volatility_target'].astype('float64')/ 0.15)
 
 		#Models
 		trading_env.strategies = pd.DataFrame(list(Strategy.objects.values('code', 'description', 'strategy_type__code')))
