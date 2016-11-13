@@ -20,6 +20,7 @@ from stock import Stock
 from future_month import FutureMonth
 from future_contract import FutureContract
 from future import Future
+from fx_forward import FxForward
 from data_point import DataPoint
 from data_feed import DataFeed
 from strategy_type import StrategyType

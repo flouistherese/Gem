@@ -28,18 +28,19 @@ class TradingEnvironmentExport:
 		trading_env.model_feeds = pd.DataFrame(list(TradingModelFeed.objects.values('trading_model__code', 'data_feed__code')))
 		trading_env.model_feeds.rename(columns={'trading_model__code':'trading_model', 'data_feed__code':'feed'}, inplace=True)
 
+		#Instruments
 		trading_env.target_instruments = pd.DataFrame(list(TargetInstrument.objects.values('trading_model__code', 'instrument__code')))
-		trading_env.model_feeds.rename(columns={'trading_model__code':'trading_model', 'instrument__code':'instrument'}, inplace=True)
+		trading_env.target_instruments.rename(columns={'trading_model__code':'trading_model', 'instrument__code':'instrument'}, inplace=True)
 
 		#Limits
-		trading_env.model_limits = pd.DataFrame(list(ModelLimit.objects.values('trading_model__code', 'account__code', 'limit_type__code', 'value')))
-		trading_env.model_limits.rename(columns={'trading_model__code':'trading_model', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
+		trading_env.model_limits = pd.DataFrame(list(ModelLimit.objects.values('trading_model__code', 'account__code', 'limit_type__code', 'side', 'value')))
+		trading_env.model_limits.rename(columns={'trading_model__code':'trading_model', 'account__code':'account', 'limit_type__code':'limit_type', 'value':'limit'}, inplace=True)
 
-		trading_env.asset_limits = pd.DataFrame(list(AssetLimit.objects.values('instrument_family__code', 'account__code', 'limit_type__code', 'value')))
-		trading_env.asset_limits.rename(columns={'instrument_family__code':'instrument_family', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
+		trading_env.asset_limits = pd.DataFrame(list(AssetLimit.objects.values('instrument_family__code', 'account__code', 'limit_type__code', 'side', 'value')))
+		trading_env.asset_limits.rename(columns={'instrument_family__code':'instrument_family', 'account__code':'account', 'limit_type__code':'limit_type', 'value':'limit'}, inplace=True)
 
-		trading_env.sector_limits = pd.DataFrame(list(SectorLimit.objects.values('sector__code', 'account__code', 'limit_type__code', 'value')))
-		trading_env.sector_limits.rename(columns={'sector__code':'sector', 'account__code':'account', 'limit_type__code':'limit_type'}, inplace=True)
+		trading_env.sector_limits = pd.DataFrame(list(SectorLimit.objects.values('sector__code', 'account__code', 'limit_type__code', 'side', 'value')))
+		trading_env.sector_limits.rename(columns={'sector__code':'sector', 'account__code':'account', 'limit_type__code':'limit_type', 'value':'limit'}, inplace=True)
 
 		#Portfolio Tree
 		trading_env.portfolio_gearings = pd.DataFrame(list(PortfolioGearing.objects.values('account_group__code', 'value')))
@@ -51,7 +52,6 @@ class TradingEnvironmentExport:
 		trading_env.strategy_gearings = pd.DataFrame(list(StrategyGearing.objects.values('account_group__code', 'strategy__code', 'value')))
 		trading_env.strategy_gearings.rename(columns={'account_group__code':'account_group', 'strategy__code':'strategy','value':'strategy_gearing'}, inplace=True)
 		trading_env.strategy_gearings = trading_env.strategy_gearings.merge(trading_env.strategies[['strategy','strategy_type']])
-
 
 		trading_env.strategy_types_weights = pd.DataFrame(list(StrategyTypeWeight.objects.values('account_group__code', 'strategy_type__code', 'value')))
 		trading_env.strategy_types_weights.rename(columns={'account_group__code':'account_group', 'strategy_type__code':'strategy_type','value':'strategy_types_weight'}, inplace=True)

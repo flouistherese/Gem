@@ -5,6 +5,7 @@ from gemMarketData.market_data_interfaces import *
 from sqlalchemy import create_engine
 from datetime import timedelta
 import pandas as pd
+import pdb
 
 
 class MarketDataImport:
@@ -39,12 +40,16 @@ class MarketDataImport:
 
 	@staticmethod
 	def backfill_data(products, columns, sql_alchemy_engine, data_point_types = get_data_point_types(), market_data_interface = QuandlInterface()):
+		pdb.set_trace()
 		for p in products:
 			existing_data_points = DataPoint.objects.filter(instrument_id = p.instrument.id)
 			latest_date = None
 			if existing_data_points:
 				latest_date = DataPoint.objects.filter(instrument_id = p.instrument.id).latest('date').date
+				if(latest_date == date.today()):
+					return
 				latest_date = str(latest_date + timedelta(days = 1))
+
 			response = market_data_interface.get_historical_data(p.bloomberg_code, columns, latest_date)
 			MarketDataImport.store_market_data(p, response, columns, data_point_types, sql_alchemy_engine)
 
