@@ -42,6 +42,9 @@ class TradingEnvironmentExport:
 		trading_env.sector_limits = pd.DataFrame(list(SectorLimit.objects.values('sector__code', 'account__code', 'limit_type__code', 'side', 'value')))
 		trading_env.sector_limits.rename(columns={'sector__code':'sector', 'account__code':'account', 'limit_type__code':'limit_type', 'value':'limit'}, inplace=True)
 
+		trading_env.roundings = pd.DataFrame(list(Rounding.objects.values('instrument_type__code', 'value')))
+		trading_env.roundings.rename(columns={'instrument_type__code':'instrument_type', 'value':'rounding'}, inplace=True)
+
 		#Portfolio Tree
 		trading_env.portfolio_gearings = pd.DataFrame(list(PortfolioGearing.objects.values('account_group__code', 'value')))
 		trading_env.portfolio_gearings.rename(columns={'account_group__code':'account_group','value':'portfolio_gearing'}, inplace=True)

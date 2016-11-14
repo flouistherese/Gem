@@ -11,6 +11,7 @@ from data_point_source import DataPointSource
 from instrument_type import InstrumentType
 from instrument_family import InstrumentFamily
 from instrument import Instrument
+from rounding import Rounding
 from settlement_type import SettlementType
 from currency_pair import CurrencyPair
 from report_type import ReportType
