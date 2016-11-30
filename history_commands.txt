@@ -1,0 +1,508 @@
+    1  subl&
+    2  sudo apt-get uninstall pgadmin3
+    3  sudo apt-get remove  pgadmin3
+    4  sudo apt-get update
+    5  sudo apt-get install python-django
+    6  sudo apt-get updatedjango-admin --version
+    7  django-admin --version
+    8  sudo apt-get install python-pip
+    9  sudo pip install virtualenv
+   10  sudo add-apt-repository ppa:webupd8team/sublime-text-3
+   11  sudo apt-get update
+   12  sudo apt-get install sublime-text-installer
+   13  sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
+   14  sudo su - postgres
+   15  ls
+   16  cd Dropbox/Code/Gem/
+   17  ls
+   18  sudo apt-get --purge remove postgresql
+   19  sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
+   20  sudo su - postgres
+   21  cd Dropbox/Code/Gem/
+   22  git status
+   23  sudo apt install git
+   24  git status
+   25  cd gemSystematic/
+   26  git status
+   27  vim gemMarketData/management/commands/import_latest_market_data.pyc
+   28  sudo apt install vim
+   29  vim gemMarketData/management/commands/import_latest_market_data.pyc
+   30  git status
+   31  git add .
+   32  git status
+   33  git add ../commands.txt
+   34  git add ../documentation.txt 
+   35  git add ../TODO.txt
+   36  git status
+   37  git commit "Move stuff around"
+   38  git commit -m "Move stuff around"
+   39  git config --global user.email "floflowian@live.fr"
+   40  git config --global user.name "Florian Louis-Therese"
+   41  git commit -m "Move stuff around"
+   42  git push origin master
+   43  ssh-keygen -t rsa -b 4096 -C "floflowian@live.fr"
+   44  vim ssh-add ~/.ssh/id_rsa
+   45  cd
+   46  cd .ssh/
+   47  ls
+   48  vim id_rsa
+   49  vim id_rsa.pub 
+   50  clip < ~/.ssh/id_rsa.pub
+   51  vim id_rsa.pub 
+   52  cd -
+   53  cd ~/Dropbox/Code/Gem/gemSystematic
+   54  git push origin master
+   55  git status
+   56  git add .
+   57  git status
+   58  git add ../commands.txt
+   59  git commit -m "Add futures contract data, start work on reports"
+   60  git push origin master
+   61  cd Dropbox/Code/Gem/
+   62  source gemenv/bin/activate
+   63  cd gemSystematic/
+   64  python manage.py makemigrations gemDatabase
+   65  python manage.py migrate
+   66  python manage.py makemigrations gemMarketData
+   67  python manage.py migrate
+   68  python manage.py backfill_market_data
+   69  python manage.py shell_plus
+   70  python manage.py makemigrations --empty gemMarketData -n addFutures
+   71  python manage.py makemigrations --empty gemDatabase -n addFutures
+   72  python manage.py makemigrations gemDatabase
+   73  python manage.py migrate
+   74  python manage.py shell_plus
+   75  python manage.py backfill_market_data --drop_tables
+   76  python manage.py makemigrations gemDatabase
+   77  python manage.py migrate
+   78  python manage.py backfill_market_data --drop_tables
+   79  python manage.py makemigrations gemDatabase
+   80  python manage.py migrate
+   81  python manage.py shell_plus
+   82  python manage.py makemigrations --empty gemDatabase -n addReports
+   83  python manage.py migrate
+   84  python manage.py makemigration gemDatabase
+   85  python manage.py makemigrations gemDatabase
+   86  python manage.py migrate
+   87  python manage.py shell_plus
+   88  python manage.py run_zero_value_report
+   89  python manage.py backfill_market_data
+   90  python manage.py shell_plus
+   91  python manage.py makemigrations gemDatabase
+   92  python manage.py migrate
+   93  python manage.py shell_plus
+   94  git status
+   95  git add .
+   96  git status
+   97  git commit -m "Refactor gemMarketData layout"
+   98  git push origin master
+   99  python manage.py shell_plus --ipython
+  100  ipyhton
+  101  pip install ipython
+  102  python manage.py shell_plus --ipython
+  103  python manage.py shell_plus
+  104  htop
+  105  sudo apt install htop
+  106  htop
+  107  kill -6 7371
+  108  kill -9 7371
+  109  cd Dropbox/Code/Gem/
+  110  ls
+  111  source gemenv/bin/activate
+  112  cd gemSystematic/
+  113  python manage.py shell_plus
+  114  python manage.py makemigrations --empty gemDatabase -n addDataFeeds
+  115  python manage.py makemigrations gemDatabase
+  116  python manage.py migrate
+  117  python manage.py makemigrations gemDatabase
+  118  python manage.py makemigrations --empty gemDatabase -n addDataFeeds
+  119  python manage.py makemigrations gemDatabase
+  120  python manage.py migrate
+  121  python manage.py makemigrations gemDatabase
+  122  python manage.py migrate
+  123  python manage.py makemigrations gemDatabase
+  124  python manage.py migrate
+  125  python manage.py makemigrations --empty gemDatabase -n addDataFeeds
+  126  python manage.py makemigrations gemDatabase
+  127  python manage.py migrate
+  128  python manage.py shell_plus
+  129  python manage.py migrate
+  130  python manage.py shell_plus
+  131  python manage.py makemigrations gemDatabase
+  132  python manage.py migrate
+  133  python manage.py shell_plus
+  134  python manage.py makemigrations gemDatabase
+  135  python manage.py migrate
+  136  python manage.py shell_plus
+  137  python manage.py makemigrations --empty gemDatabase -n addCurrencyPairs
+  138  python manage.py shell_plus
+  139  python manage.py makemigrations --empty gemDatabase -n addCurrencyPairs
+  140  python manage.py makemigrations gemDatabase
+  141  python manage.py migrate
+  142  python manage.py shell_plus
+  143  python manage.py makemigrations gemDatabase
+  144  python manage.py migrate
+  145  python manage.py shell_plus
+  146  python manage.py makemigrations gemDatabase
+  147  python manage.py migrate
+  148  python manage.py makemigrations --empty gemDatabase -n addCurrencySpotInstrument
+  149  python manage.py makemigrations gemDatabase
+  150  python manage.py migrate
+  151  python manage.py migrate\
+  152  python manage.py migrate
+  153  python manage.py shell_plus
+  154  python manage.py shell_plus
+  155  python manage.py makemigrations gemDatabase
+  156  python manage.py migrate
+  157  python manage.py makemigrations --empty gemDatabase -n addFutureMonths
+  158  python manage.py makemigrations gemDatabase
+  159  python manage.py migrate
+  160  python manage.py shell_plus
+  161  python manage.py makemigrations gemDatabase
+  162  python manage.py migrate
+  163  python manage.py shell_plus
+  164  python manage.py makemigrations gemDatabase
+  165  python manage.py migrate
+  166  python manage.py makemigrations gemDatabase
+  167  python manage.py migrate
+  168  python manage.py makemigrations gemDatabase
+  169  python manage.py migrate
+  170  python manage.py makemigrations gemDatabase
+  171  python manage.py migrate
+  172  python manage.py makemigrations gemDatabase
+  173  python manage.py migrate
+  174  python manage.py makemigrations gemDatabase
+  175  python manage.py migrate
+  176  python manage.py makemigrations --empty gemDatabase -n addStrategies
+  177  python manage.py shell_plus
+  178  python manage.py makemigrations gemDatabase
+  179  python manage.py migrate
+  180  python manage.py shell_plus
+  181  python manage.py migrate
+  182  python manage.py makemigrations --empty gemDatabase -n addStrategies2
+  183  python manage.py migrate
+  184  python manage.py shell_plus
+  185  git status
+  186  git add .
+  187  git status
+  188  python manage.py shell_plus
+  189  exit
+  190  cd Dropbox/Code/Gem/
+  191  git status
+  192  cd gemSystematic/
+  193  git status
+  194  git add .
+  195  git status
+  196  git add ../TODO.txt ../commands.txt ../documentation.txt 
+  197  git status
+  198  git commit -m "Add continuous feeds, Refactor market data imports, Start work on MarketDataInterface"
+  199  git push origin master 
+  200  [wd
+  201  pwd
+  202  git status
+  203  git add .
+  204  git status
+  205  git commit -m "Add QuandlInterface, export and load market environment"
+  206  git push origin master
+  207  git status
+  208  git add .
+  209  git status
+  210  git add ../TODO.txt ../documentation.txt 
+  211  git commit -m "Split gemDatabase models in separate files, start work on Future and FutureContract"
+  212  git push origin master 
+  213  git status
+  214  git diff .
+  215  git add .
+  216  git status
+  217  git commit -m "Add FutureMonth, start work on populating new future contracts"
+  218  git push origin master
+  219  git status
+  220  git commit -m "Refactor gemDatabase layout, add TradingModel etc, add TradingEnvironment to gemMarketData" 
+  221  git push origin master
+  222  ls
+  223  cd ..
+  224  ls
+  225  ls -ltr
+  226  git status
+  227  ls -1d .git*
+  228  touch .gitignore
+  229  vim .gitignore 
+  230  git status
+  231  git add .gitignore 
+  232  git commit -m "Git ignore"
+  233  git push origin master 
+  234  git rm -r '*.pyc' 
+  235  git status
+  236  git commit -m "Remove .pyc files"
+  237  git push origin master 
+  238  cd gemSystematic/gemDatabase/models/
+  239  ls
+  240  cd ../..
+  241  git status
+  242  vim ../.gitignore 
+  243  git status
+  244  cd ..
+  245  git status
+  246  vim ../.gitignore git add .
+  247  vim .gitignore 
+  248  git add . 
+  249  git commit -m "Cleaning repo"
+  250  git status
+  251  git reset ~HEAD
+  252  git reset HEAD
+  253  git status
+  254  git reset HEAD~ 
+  255  git status
+  256  git add gemenv/*
+  257  git status
+  258  git commit -m "Cleaning repo"
+  259  git push origin master
+  260  git status
+  261  git add .gitignore
+  262  git commit -m "Commit .gitignore"
+  263  git push origin master
+  264  ls
+  265  cd ..
+  266  ls
+  267  cd gemDB/
+  268  source gemenv/bin/activate
+  269  python manage.py shell_plus
+  270  cd gemSystematic/
+  271  python manage.py shell_plus
+  272  python manage.py makemigrations gemDatabase 
+  273  python manage.py shell_plus
+  274  exit
+  275  cd ../..
+  276  cd gemSystematic/
+  277  cd ..
+  278  source gemenv/bin/activate
+  279  python manage.py shell_plus
+  280  cd gemSystematic/
+  281  python manage.py shell_plus
+  282  exit
+  283  cd ../..
+  284  source gemenv/bin/activate
+  285  cd gemSystematic/
+  286  python manage.py shell_plus
+  287  cd ../
+  288  git status
+  289  python manage.py shell_plus
+  290  cd gemSystematic/
+  291  python manage.py shell_plus
+  292  deactivate
+  293  cd ..
+  294  source gemenv/bin/activate
+  295  cd gemSystematic/
+  296  python manage.py shell_plus
+  297  deactivate
+  298  source gemenv/bin/activate
+  299  cd ..
+  300  source gemenv/bin/activate
+  301  cd gemSystematic/
+  302  python manage.py shell_plus
+  303  cd ~/Dropbox/Code/gemCore/gemUtils/dist/gemUtils-1.0/
+  304  ls
+  305  python setup.py install
+  306  cd -
+  307  python manage.py shell_plus
+  308  cd -
+  309  python setup.py install
+  310  python manage.py shell_plus
+  311  cd -
+  312  python manage.py shell_plus
+  313* 
+  314  ls -ltr
+  315  python setup.py install
+  316  cd -
+  317  python manage.py shell_plus
+  318  cd -
+  319  cd ..
+  320  cd gemUtils-1.0/
+  321  pip install gemUtils
+  322  ls /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages
+  323  cd -
+  324  cd --
+  325  cd ~/Dropbox/Code/gemDB/gemSystematic
+  326  python manage.py shell_plus
+  327  ipython
+  328  pip list
+  329  pip uninstall gemUtils
+  330  cd ../../gemCore/gemUtils/dist/gemUtils-1.0/
+  331  pip install gemUtils
+  332  vim setup.py 
+  333  pip install gemUtils
+  334  pip list
+  335  pip install gemUtils
+  336  ls
+  337  cd ..
+  338  ls
+  339  cd gemUtils-1.0/
+  340  ls
+  341  pip install gemUtils
+  342  vim setup.py 
+  343  pip uninstall gemUtils
+  344  pip install gemUtils
+  345  ls
+  346  vim PKG-INFO 
+  347  vim setup.py 
+  348  vim PKG-INFO 
+  349  pip install gemUtils
+  350  cd ..
+  351  ;s
+  352  ls
+  353  rm -rf *
+  354  ls
+  355  cd ..
+  356  python setup.py sdist
+  357  cd dist/
+  358  ls
+  359  tar -zxvf gemUtils-1.0.tar.gz 
+  360  cd gemUtils-1.0/
+  361  pip install gemUtils
+  362  pip install gemUtils-1.0
+  363  pip install gemUt
+  364  python setup.py install
+  365  pip list
+  366  cd -
+  367  cd ../../..
+  368  cd gemDB/gemSystematic/
+  369  python manage.py shell_plus
+  370  ls /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages/
+  371  ls /home/florian/Dropbox/Code/gemDB/gemen/lib/python2.7/site-packages/quandl
+  372  ls /home/florian/Dropbox/Code/gemDB/gemen/lib/python2.7/site-packages/
+  373  ls /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages/
+  374  ls /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages/quandl/
+  375  ls /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages/gemUtils-1.0-py2.7.egg-info 
+  376  vim /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages/gemUtils-1.0-py2.7.egg-info 
+  377  pip uninstall gemUtils
+  378  cd -
+  379  cd gemCore/gemUtils/
+  380  ls
+  381  rm -rf dist/
+  382  python setup.py sdist
+  383  cd dist/
+  384  ls
+  385  tar -zxvg gemUtils-1.0.tar.gz 
+  386  tar -zxvf gemUtils-1.0.tar.gz 
+  387  cd gemUtils-1.0/
+  388  pip install gemUtils
+  389  python setup.py install
+  390  ls /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages/
+  391  vim gemUtils-1.0-py2.7.egg
+  392  vim /home/florian/Dropbox/Code/gemDB/gemenv/lib/python2.7/site-packages/gemUtils-1.0-py2.7.egg 
+  393  pip list
+  394  cd -
+  395  cd ../../..
+  396  cd gemDB/gemSystematic/
+  397  python manage.py shell_plus
+  398  cd ../..
+  399  cd gemDB/
+  400  cd gemenv/lib/python2.7/site-packages/
+  401  ls
+  402  cd ../../..
+  403  cd ../
+  404  cd gemSystematic/
+  405  ls
+  406  python manage.py shell_plus
+  407  vim ../.gitignore 
+  408  python manage.py shell_plus
+  409  git status
+  410  git diff
+  411  git add gemMarketData/trading_environment_export.py
+  412  git commit -m "Export model enabled in Trading Env"
+  413  git push origin master
+  414  python manage.py migrate
+  415  python manage.py makemigrations gemDatabase
+  416  python manage.py migrate
+  417  python manage.py makemigrations --empty gemDatabase -n addTargetInstruments
+  418  python manage.py makemigrations gemDatabase
+  419  python manage.py migrate
+  420  python manage.py shell_plus
+  421  python manage.py migrate
+  422  python manage.py shell_plus
+  423  python manage.py makemigrations gemDatabase
+  424  python manage.py migrate
+  425  python manage.py makemigrations --empty gemDatabase -n addSector
+  426  python manage.py makemigrations gemDatabase
+  427  python manage.py migrate
+  428  python manage.py shell_plus
+  429  python manage.py makemigrations --empty gemDatabase -n addLimitTypes
+  430  python manage.py makemigrations gemDatabase
+  431  python manage.py migrate
+  432  python manage.py makemigrations --empty gemDatabase -n addAccount
+  433  python manage.py makemigrations gemDatabase
+  434  python manage.py migrate
+  435  python manage.py shell_plus
+  436  git status
+  437  git add .
+  438  git status
+  439  git commit -m "Add Sector, ModelLimit, AssetLimit, SectorLimit, populate accounts, add limits to trading data export"
+  440  git push origin master 
+  441  python manage.py shell_plus
+  442  python manage.py makemigrations gemDatabase
+  443  python manage.py migrate
+  444  python manage.py makemigrations --empty gemDatabase -n addGearings
+  445  python manage.py makemigrations gemDatabase
+  446  python manage.py migrate
+  447  python manage.py shell_plus
+  448  python manage.py makemigrations --empty gemDatabase -n addMoreGearings
+  449  python manage.py makemigrations gemDatabase
+  450  python manage.py migrate
+  451  python manage.py shell_plus
+  452  git status
+  453  git add .
+  454  git status
+  455  git commit -m "Start work on gearing"
+  456  git push origin master
+  457  python manage.py shell_plus
+  458  cd ..
+  459  git status
+  460  git add gemSystematic/gemMarketData/trading_environment_export.py
+  461  git commit -m 'Quick commit'
+  462  git push origin master
+  463  cd -
+  464  python manage.py shell_plus
+  465  git status
+  466  git diff
+  467  python manage.py shell_plus
+  468  python manage.py makemigrations gemDatabase
+  469  python manage.py migrate
+  470  python manage.py shell_plus
+  471  python manage.py makemigrations gemDatabase
+  472  python manage.py migrate
+  473  python manage.py shell_plus
+  474  python manage.py makemigrations gemDatabase
+  475  python manage.py migrate
+  476  python manage.py shell_plus
+  477  git status
+  478  git add .
+  479  git commit -m "Convert units, start work on limits"
+  480  git push origin master
+  481  python manage.py shell_plus
+  482  python manage.py makemigrations gemDatabase
+  483  python manage.py migrate
+  484  python manage.py shell_plus
+  485  git status
+  486  git diff
+  487  git status
+  488  git add gemDatabase/models/instrument_family.py gemMarketData/market_environment_export.py gemMarketData/trading_environment_export.py gemDatabase/migrations/0041_instrumentfamily_currency_pair.py
+  489  git status
+  490  git commit -m "Improve work around instrument families"
+  491  git push origin master 
+  492  python manage.py shell_plus
+  493  python manage.py makemigrations gemDatabase
+  494  python manage.py migrate
+  495  python manage.py makemigrations gemDatabase
+  496  python manage.py migrate
+  497  python manage.py makemigrations --empty gemDatabase -n addRoundings
+  498  python manage.py migrate
+  499  python manage.py shell_plus
+  500  git status
+  501  git add .
+  502  git commit -m "Add rounding to models and trading env"
+  503  git push origin master
+  504  dpkg --get-selections | grep -v deinstall
+  505  hist
+  506  history
+  507  hisory > ../history_commands.txt
+  508  history > ../history_commands.txt

@@ -14,3 +14,12 @@ sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython
 pip install django-pandas
 
 python manage.py shell_plus --ipython
+
+
+
+
+ModelLimit(account_id = Account["GEM"].id, trading_model_id = TradingModel["ENERGY_MOM_CL"].id, limit_type_id = LimitType["PROPORTIONAL"].id, value = 5000000).save()
+
+AssetLimit(account_id = Account["GEM"].id, instrument_family_id = InstrumentFamily["CL"].id, limit_type_id = LimitType["PROPORTIONAL"].id, value = 8000000).save()
+
+SectorLimit(account_id = Account["GEM"].id, sector_id = Sector["ENERGY"].id, limit_type_id = LimitType["PROPORTIONAL"].id, value = 15000000).save()
