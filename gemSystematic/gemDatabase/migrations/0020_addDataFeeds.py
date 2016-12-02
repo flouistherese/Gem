@@ -16,7 +16,7 @@ def populate_data_feeds(apps, schema_editor):
     Instrument(code = "NG1", description = "NG continuous front month instrument", instrument_type = InstrumentType["DATA_FEED"]).save()
     DataFeed(code = "NG1", description = "NG continuous front month", future_id = Future["NG"].id, instrument_id = Instrument["NG1"].id, bloomberg_code = 'CHRIS/CME_NG1').save()
 
-    DataFeed(code = "GBPUSD", description = "GBPUSD", currency_pair_id = CurrencyPair["GBPUSD"].id, instrument_id = Instrument["GBPUSD_SPOT"].id, bloomberg_code = CurrencyPair["GBPUSD"].bloomberg_code).save()
+    DataFeed(code = "GBPUSD_SPOT", description = "GBPUSD_SPOT", currency_pair_id = CurrencyPair["GBPUSD"].id, instrument_id = Instrument["GBPUSD_SPOT"].id, bloomberg_code = CurrencyPair["GBPUSD"].bloomberg_code).save()
     
 
 class Migration(migrations.Migration):

@@ -6,13 +6,22 @@ from gemDatabase.models import *
 def populate_gearings(apps, schema_editor):
 	
 	PortfolioGearing(account_group_id = AccountGroup["MAIN"].id, value = 2.0).save()
-	StrategyTypeGearing(account_group_id = AccountGroup["MAIN"].id, strategy_type_id = StrategyType["MOMENTUM"].id, value = 15.0).save()
-	StrategyGearing(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["ENERGY_MOM"].id, value = 20.0).save()
-
-	StrategyTypeWeight(account_group_id = AccountGroup["MAIN"].id, strategy_type_id = StrategyType["MOMENTUM"].id, value = 3.0 ).save()
-	StrategyWeight(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["ENERGY_MOM"].id, value = 2.0 ).save()
-	TradingModelWeight(account_group_id = AccountGroup["MAIN"].id, trading_model_id = TradingModel["ENERGY_MOM_CL"].id, value = 5.0 ).save()
 	
+	StrategyTypeGearing(account_group_id = AccountGroup["MAIN"].id, strategy_type_id = StrategyType["MOMENTUM"].id, value = 15.0).save()
+	StrategyTypeWeight(account_group_id = AccountGroup["MAIN"].id, strategy_type_id = StrategyType["MOMENTUM"].id, value = 3.0 ).save()
+
+	StrategyGearing(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["ENERGY_MOM"].id, value = 20.0).save()
+	StrategyGearing(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["BOND_MOM"].id, value = 25.0).save()
+	StrategyGearing(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["FX_MOM"].id, value = 12.0).save()
+
+	StrategyWeight(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["ENERGY_MOM"].id, value = 2.0 ).save()
+	StrategyWeight(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["BOND_MOM"].id, value = 2.0 ).save()
+	StrategyWeight(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["FX_MOM"].id, value = 4.0 ).save()
+
+	TradingModelWeight(account_group_id = AccountGroup["MAIN"].id, trading_model_id = TradingModel["ENERGY_MOM_CL"].id, value = 5.0 ).save()
+	TradingModelWeight(account_group_id = AccountGroup["MAIN"].id, trading_model_id = TradingModel["ENERGY_MOM_NG"].id, value = 1.5 ).save()
+	TradingModelWeight(account_group_id = AccountGroup["MAIN"].id, trading_model_id = TradingModel["BOND_MOM_TY"].id, value = 4.0 ).save()
+	TradingModelWeight(account_group_id = AccountGroup["MAIN"].id, trading_model_id = TradingModel["FX_MOM_GBP"].id, value = 3.0 ).save()
     
 class Migration(migrations.Migration):
 

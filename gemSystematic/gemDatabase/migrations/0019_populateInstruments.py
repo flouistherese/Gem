@@ -19,8 +19,9 @@ def populate_instruments(apps, schema_editor):
     InstrumentFamily(code = "AAPL", description = "Apple Inc. stock instrument family", stock = Stock["AAPL"]).save()
     InstrumentFamily(code = "TSLA", description = "Tesla Inc. stock instrument family", stock = Stock["TSLA"]).save()
     InstrumentFamily(code = "CL", description = "CL future instrument family", future = Future["CL"]).save()
-    InstrumentFamily(code = "NG", description = "NG future instrument family", future = Future["TY"]).save()
+    InstrumentFamily(code = "NG", description = "NG future instrument family", future = Future["NG"]).save()
     InstrumentFamily(code = "TY", description = "TY future instrument family", future = Future["TY"]).save()
+    InstrumentFamily(code = "GBPUSD", description = "GBPUSD instrument family", currency_pair = CurrencyPair["GBPUSD"]).save()
 
     Future(code = "CL", description = "Crude Oil Futures", bloomberg_code = "CL", minimum_tick_size = 0.001, contract_size = 1000, point_value = 100, settlement_type = SettlementType["PHYSICAL"], exchange = Exchange["CME"], currency = Currency["USD"]).save()
     Future(code = "NG", description = "Natural Gas Futures", bloomberg_code = "NG", minimum_tick_size = 0.001, contract_size = 1000, point_value = 100, settlement_type = SettlementType["PHYSICAL"], exchange = Exchange["CME"], currency = Currency["USD"]).save()
@@ -30,10 +31,30 @@ def populate_instruments(apps, schema_editor):
     Instrument(code = "CLH17", description = "Crude Oil Futures contract March 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
     Instrument(code = "CLJ17", description = "Crude Oil Futures contract April 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
 
+    Instrument(code = "NGG17", description = "Nat gas Futures contract February 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
+    Instrument(code = "NGH17", description = "Nat gas Futures contract March 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
+    Instrument(code = "NGJ17", description = "Nat gas Futures contract April 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
+
+    Instrument(code = "TYM17", description = "TY Futures contract February 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
+    Instrument(code = "TYH17", description = "TY Futures contract March 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
+    Instrument(code = "TYZ17", description = "TY Futures contract April 2017", instrument_type = InstrumentType["FUTURE_CONTRACT"]).save()
+
+    Instrument(code = "GBPUSD_2017-04-01", description = "GBPUSD Forward march 2017", instrument_type = InstrumentType["FX_FORWARD"]).save()
+
     FutureContract(code = 'CLG17', bloomberg_code = 'CME/CLG2017', instrument = Instrument["CLG17"], future = Future["CL"], first_trade_date = "2016-05-01", last_trade_date = "2017-02-15", first_notice_date = "2017-02-15", month = Month["FEB"], year = 2017).save()
     FutureContract(code = 'CLH17', bloomberg_code = 'CME/CLH2017', instrument = Instrument["CLH17"], future = Future["CL"], first_trade_date = "2016-06-01", last_trade_date = "2017-03-15", first_notice_date = "2017-03-15", month = Month["MAR"], year = 2017).save()
     FutureContract(code = 'CLJ17', bloomberg_code = 'CME/CLJ2017', instrument = Instrument["CLJ17"], future = Future["CL"], first_trade_date = "2016-07-01", last_trade_date = "2017-04-15", first_notice_date = "2017-04-15", month = Month["APR"], year = 2017).save()
+
+    FutureContract(code = 'NGG17', bloomberg_code = 'CME/NGG2017', instrument = Instrument["NGG17"], future = Future["NG"], first_trade_date = "2016-05-01", last_trade_date = "2017-02-15", first_notice_date = "2017-02-15", month = Month["FEB"], year = 2017).save()
+    FutureContract(code = 'NGH17', bloomberg_code = 'CME/NGH2017', instrument = Instrument["NGH17"], future = Future["NG"], first_trade_date = "2016-06-01", last_trade_date = "2017-03-15", first_notice_date = "2017-03-15", month = Month["MAR"], year = 2017).save()
+    FutureContract(code = 'NGJ17', bloomberg_code = 'CME/NGJ2017', instrument = Instrument["NGJ17"], future = Future["NG"], first_trade_date = "2016-07-01", last_trade_date = "2017-04-15", first_notice_date = "2017-04-15", month = Month["APR"], year = 2017).save()
+
+    FutureContract(code = 'TYM17', bloomberg_code = 'CME/TYM2017', instrument = Instrument["TYM17"], future = Future["TY"], first_trade_date = "2016-05-01", last_trade_date = "2017-02-15", first_notice_date = "2017-02-15", month = Month["JUN"], year = 2017).save()
+    FutureContract(code = 'TYH17', bloomberg_code = 'CME/TYH2017', instrument = Instrument["TYH17"], future = Future["TY"], first_trade_date = "2016-05-01", last_trade_date = "2017-03-15", first_notice_date = "2017-02-15", month = Month["MAR"], year = 2017).save()
+    FutureContract(code = 'TYZ17', bloomberg_code = 'CME/TYZ2017', instrument = Instrument["TYZ17"], future = Future["TY"], first_trade_date = "2016-05-01", last_trade_date = "2017-04-15", first_notice_date = "2017-02-15", month = Month["DEC"], year = 2017).save()
     
+    FxForward(code = 'GBPUSD_2017-04-01', description = 'GBPUSD fx forward', contract_date = '2017-04-01', currency_pair = CurrencyPair['GBPUSD'], instrument = Instrument['GBPUSD_2017-04-01'], notional_currency = Currency['USD']).save()
+
     CurrencyPair(code = "GBPUSD", bloomberg_code = 'BOE/XUDLGBD', description = "GBP/USD", pip_size = 0.00001, base_currency_id = Currency["GBP"].id, quoted_currency_id = Currency["USD"].id, instrument_id = Instrument["GBPUSD_SPOT"].id).save()
     CurrencyPair(code = "USDJPY", bloomberg_code = 'BOE/XUDLJYD', description = "USD/JPY", pip_size = 0.001, base_currency_id = Currency["USD"].id, quoted_currency_id = Currency["JPY"].id, instrument_id = Instrument["USDJPY_SPOT"].id).save()
     CurrencyPair(code = "EURUSD", bloomberg_code = 'BOE/XUDLERD', description = "EUR/USD", pip_size = 0.00001, base_currency_id = Currency["EUR"].id, quoted_currency_id = Currency["USD"].id, instrument_id = Instrument["EURUSD_SPOT"].id).save()

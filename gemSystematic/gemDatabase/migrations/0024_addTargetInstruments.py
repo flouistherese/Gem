@@ -6,6 +6,9 @@ from gemDatabase.models import *
 def populate_target_instruments(apps, schema_editor):
 	
 	TargetInstrument(trading_model_id = TradingModel["ENERGY_MOM_CL"].id, instrument_id = Instrument["CLJ17"].id).save()
+	TargetInstrument(trading_model_id = TradingModel["ENERGY_MOM_NG"].id, instrument_id = Instrument["NGJ17"].id).save()
+	TargetInstrument(trading_model_id = TradingModel["BOND_MOM_TY"].id, instrument_id = Instrument["TYM17"].id).save()
+	TargetInstrument(trading_model_id = TradingModel["FX_MOM_GBP"].id, instrument_id = Instrument["GBPUSD_2017-04-01"].id).save()
 
 
 
