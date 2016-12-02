@@ -40,7 +40,7 @@ class MarketDataImport:
 
 	@staticmethod
 	def backfill_data(products, columns, sql_alchemy_engine, data_point_types = get_data_point_types(), market_data_interface = QuandlInterface()):
-		pdb.set_trace()
+		#pdb.set_trace()
 		for p in products:
 			existing_data_points = DataPoint.objects.filter(instrument_id = p.instrument.id)
 			latest_date = None

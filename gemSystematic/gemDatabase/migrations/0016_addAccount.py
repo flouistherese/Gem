@@ -13,7 +13,7 @@ def populate_account(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0033_addLimitTypes'),
+        ('gemDatabase', '0015_addLimitTypes'),
     ]
 
     operations = [

@@ -6,6 +6,7 @@ import os.path
 from decimal import *
 from gemUtils.utils import default_dated_directory
 from gemTradingData.trading_environment import TradingEnvironment
+import pdb
 
 class TradingEnvironmentExport:
 	

@@ -13,7 +13,7 @@ def populate_limit_types(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0032_sectorlimit'),
+        ('gemDatabase', '0014_addSector'),
     ]
 
     operations = [

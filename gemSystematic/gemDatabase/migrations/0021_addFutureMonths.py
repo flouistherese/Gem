@@ -4,8 +4,7 @@ from django.db import models, migrations
 from gemDatabase.models import *
 
 def populate_future_months(apps, schema_editor):
-    # We can't import the Person model directly as it may be a newer
-    # version than this migration expects. We use the historical version.
+    
     FutureMonth(future_id = Future["CL"].id, month_id = Month["JAN"].id).save()
     FutureMonth(future_id = Future["CL"].id, month_id = Month["FEB"].id).save()
     FutureMonth(future_id = Future["CL"].id, month_id = Month["MAR"].id).save()
@@ -22,7 +21,7 @@ def populate_future_months(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0019_futuremonth'),
+        ('gemDatabase', '0020_addDataFeeds'),
     ]
 
     operations = [

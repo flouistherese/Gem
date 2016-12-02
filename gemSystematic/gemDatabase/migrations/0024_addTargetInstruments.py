@@ -13,7 +13,7 @@ def populate_target_instruments(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0028_targetinstrument'),
+        ('gemDatabase', '0023_addGearings'),
     ]
 
     operations = [

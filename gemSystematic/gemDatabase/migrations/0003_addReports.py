@@ -6,8 +6,6 @@ from django.db import models, migrations
 from gemDatabase.models import *
 
 def populate_reports(apps, schema_editor):
-    # We can't import the Person model directly as it may be a newer
-    # version than this migration expects. We use the historical version.
 
     ReportType(code = "ZERO_VALUE", description = "Zero value report").save()
     ReportType(code = "MISSING_DATA", description = "Missing data report").save()
@@ -17,7 +15,7 @@ def populate_reports(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0005_auto_20161028_0042'),
+        ('gemDatabase', '0002_populateInstrumentTypes'),
     ]
 
     operations = [

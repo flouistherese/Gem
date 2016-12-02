@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'gemDatabase.apps.GemdatabaseConfig',
     'aldjemy',
-    'django_temporal',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',

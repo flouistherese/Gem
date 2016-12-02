@@ -26,7 +26,7 @@ def populate_instruments(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0010_auto_20161023_1854'),
+        ('gemDatabase', '0005_populateCurrencies'),
     ]
 
     operations = [

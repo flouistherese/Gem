@@ -13,12 +13,11 @@ def populate_gearings(apps, schema_editor):
 	StrategyWeight(account_group_id = AccountGroup["MAIN"].id, strategy_id = Strategy["ENERGY_MOM"].id, value = 2.0 ).save()
 	TradingModelWeight(account_group_id = AccountGroup["MAIN"].id, trading_model_id = TradingModel["ENERGY_MOM_CL"].id, value = 5.0 ).save()
 	
-	
     
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0035_portfoliogearing_strategygearing_strategytypegearing_strategytypeweight_strategyweight_tradingmodelw'),
+        ('gemDatabase', '0022_addStrategies'),
     ]
 
     operations = [

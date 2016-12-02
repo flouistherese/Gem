@@ -6,7 +6,7 @@ from datetime import date
 import cPickle as pickle
 import os.path
 from gemUtils.utils import default_dated_directory
-from gemMarketData.market_environment import MarketEnvironment
+from gemMarketDataCore.market_environment import MarketEnvironment
 
 class MarketEnvironmentExport:
 

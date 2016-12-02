@@ -20,7 +20,7 @@ def populate_sectors(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0030_auto_20161109_0006'),
+        ('gemDatabase', '0010_addCurrencySpotInstrument'),
     ]
 
     operations = [

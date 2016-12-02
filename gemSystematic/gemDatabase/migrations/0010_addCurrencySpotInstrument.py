@@ -7,10 +7,7 @@ from django.db import models, migrations
 from gemDatabase.models import *
 
 def populate_currency_spot_instruments(apps, schema_editor):
-    # We can't import the Person model directly as it may be a newer
-    # version than this migration expects. We use the historical version.
-    InstrumentType(code = "FX_SPOT", description = "FX Spot").save()
-
+    
     Instrument(code = "GBPUSD_SPOT", description = "GBP/USD Spot", instrument_type_id = InstrumentType["FX_SPOT"].id).save()
     Instrument(code = "USDJPY_SPOT", description = "USD/JPY Spot", instrument_type_id = InstrumentType["FX_SPOT"].id).save()
     Instrument(code = "EURUSD_SPOT", description = "EUR/USD Spot", instrument_type_id = InstrumentType["FX_SPOT"].id).save()
@@ -18,7 +15,7 @@ def populate_currency_spot_instruments(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0017_currencypair_instrument'),
+        ('gemDatabase', '0008_populateMonths'),
     ]
 
     operations = [

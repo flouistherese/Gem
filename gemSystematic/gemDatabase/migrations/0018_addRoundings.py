@@ -13,7 +13,7 @@ def populate_roundings(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gemDatabase', '0042_rounding'),
+        ('gemDatabase', '0016_addAccount'),
     ]
 
     operations = [
