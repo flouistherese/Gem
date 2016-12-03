@@ -26,7 +26,7 @@ def populate_strategies(apps, schema_editor):
 	TradingModelFeed(trading_model_id = TradingModel['ENERGY_MOM_CL'].id, data_feed_id = DataFeed["CL1"].id).save()
 	TradingModelFeed(trading_model_id = TradingModel['BOND_MOM_TY'].id, data_feed_id = DataFeed["TY1"].id).save()
 	TradingModelFeed(trading_model_id = TradingModel['ENERGY_MOM_NG'].id, data_feed_id = DataFeed["NG1"].id).save()
-	TradingModelFeed(trading_model_id = TradingModel['FX_MOM_GBP'].id, data_feed_id = DataFeed["GBPUSD"].id).save()
+	TradingModelFeed(trading_model_id = TradingModel['FX_MOM_GBP'].id, data_feed_id = DataFeed["GBPUSD_SPOT"].id).save()
     
 class Migration(migrations.Migration):
 
